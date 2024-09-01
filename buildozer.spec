@@ -1,7 +1,7 @@
 [app]
 
 # (str) Title of your application
-title = NEUMAX 
+title = NEUMAX  
 
 # (str) Package name
 package.name = myapp
