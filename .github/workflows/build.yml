@@ -43,17 +43,11 @@ jobs:
       - name: Create virtual environment
         run: python3 -m venv venv
 
-      - name: Install Cython and Virtualenv Dependencies
+      - name: Install Buildozer and Cython
         run: |
           source venv/bin/activate
           python -m pip install --upgrade pip
-          python -m pip install cython
-
-      - name: Install Buildozer and Requirements
-        run: |
-          source venv/bin/activate
-          python -m pip install buildozer
-          python -m pip install -r requirements.txt
+          python -m pip install cython buildozer
 
       - name: Cache Buildozer global directory
         uses: actions/cache@v2
