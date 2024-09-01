@@ -21,6 +21,9 @@ source.include_exts = py,png,jpg,kv,atlas
 # (list) List of directory to exclude
 #source.exclude_dirs = tests, bin, venv
 
+# (str) Application versioning (method 1)
+version = 0.1
+
 # (list) Application requirements
 requirements = python3==3.7.6,hostpython3==3.7.6,kivy,kivymd,firebase-admin
 
@@ -68,13 +71,12 @@ log_level = 2
 # (int) Display warning if buildozer is run as root (0 = False, 1 = True)
 warn_on_root = 1
 
-# (str) Application versioning (method 1)
-version = 0.1
 # (str) Path to build artifact storage, absolute or relative to spec file
 # build_dir = ./.buildozer
 
 # (str) Path to build output (i.e. .apk, .aab, .ipa) storage
 # bin_dir = ./bin
+
 
 #    -----------------------------------------------------------------------------
 #    List as sections
