@@ -43,40 +43,21 @@ jobs:
       - name: Create virtual environment
         run: python3 -m venv venv
 
-      - name: Install Buildozer and Cython
+      - name: Install Buildozer and Python-for-Android
         run: |
           source venv/bin/activate
           python -m pip install --upgrade pip
-          python -m pip install cython buildozer
+          python -m pip install buildozer python-for-android
 
-      - name: Cache Buildozer global directory
-        uses: actions/cache@v2
-        with:
-          path: ~/.buildozer
-          key: buildozer-global-${{ hashFiles('buildozer.spec') }}
-        continue-on-error: true
-
-      - name: Cache Buildozer directory
-        uses: actions/cache@v2
-        with:
-          path: .buildozer
-          key: ${{ runner.os }}-${{ hashFiles('buildozer.spec') }}
-        continue-on-error: true
-
-      - name: Clean old build artifacts
+      - name: Verify python-for-android Installation
         run: |
           source venv/bin/activate
-          buildozer android clean
-
-      - name: Reinstall Python-for-Android
-        run: |
-          source venv/bin/activate
-          pip uninstall -y python-for-android
-          pip install --upgrade python-for-android
+          p4a --version  # Comando para verificar la versión instalada de python-for-android
 
       - name: Build with Buildozer
         run: |
           source venv/bin/activate
+          buildozer android clean
           buildozer android debug
 
       - name: Upload artifacts
