@@ -31,12 +31,17 @@ jobs:
             libnss3-dev \
             libgdbm-compat-dev \
             tk-dev \
-            python3-pip
+            python3-pip \
+            python3-venv
+
+      - name: Create virtual environment
+        run: python3 -m venv venv
 
       - name: Install Buildozer
         run: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install buildozer
+          source venv/bin/activate
+          python -m pip install --upgrade pip
+          python -m pip install buildozer
 
       - name: Cache Buildozer global directory
         uses: actions/cache@v2
@@ -48,10 +53,11 @@ jobs:
         uses: actions/cache@v2
         with:
           path: .buildozer
-          key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-${{ hashFiles('buildozer.spec') }}
+          key: ${{ runner.os }}-${{ hashFiles('buildozer.spec') }}
 
       - name: Build with Buildozer
         run: |
+          source venv/bin/activate
           buildozer android clean
           buildozer android debug
 
