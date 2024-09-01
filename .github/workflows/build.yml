@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v2 
+      - uses: actions/checkout@v2
 
       - name: Install Dependencies
         run: |
@@ -32,16 +32,28 @@ jobs:
             libgdbm-compat-dev \
             tk-dev \
             python3-pip \
-            python3-venv
+            python3-venv \
+            libtool \
+            libjpeg-dev \
+            libtiff-dev \
+            automake \
+            autoconf \
+            pkg-config
 
       - name: Create virtual environment
         run: python3 -m venv venv
 
-      - name: Install Buildozer
+      - name: Install Cython and Virtualenv Dependencies
         run: |
           source venv/bin/activate
           python -m pip install --upgrade pip
+          python -m pip install cython
+
+      - name: Install Buildozer and Requirements
+        run: |
+          source venv/bin/activate
           python -m pip install buildozer
+          python -m pip install -r requirements.txt
 
       - name: Cache Buildozer global directory
         uses: actions/cache@v2
