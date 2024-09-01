@@ -49,11 +49,6 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install buildozer python-for-android
 
-      - name: Verify python-for-android Installation
-        run: |
-          source venv/bin/activate
-          p4a --version  # Comando para verificar la versión instalada de python-for-android
-
       - name: Build with Buildozer
         run: |
           source venv/bin/activate
